@@ -1,0 +1,23 @@
+# Visual Studio temporary files
+.vs/
+**/.vs/
+**/bin/
+**/obj/
+
+# Visual Studio user-specific settings
+*.dtproj.user
+*.suo
+*.user
+
+# Build output
+*.ispac
+
+# Local secrets and configuration
+.env
+.env.*
+*.dtsConfig
+
+# Local database files
+*.bak
+*.mdf
+*.ldf

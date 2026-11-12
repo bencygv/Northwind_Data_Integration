@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="CM_Northwind_Destination"
+  DTS:DTSID="{0D655992-8C30-4AA0-BDF2-D4F3CE43F26D}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=localhost;User ID=;Initial Catalog=NorthwindIntegration;Provider=MSOLEDBSQL19.1;Persist Security Info=False;Integrated Security=SSPI;Initial File Name=;Trust Server Certificate=True;Server SPN=;Authentication=;Access Token=;Host Name In Certificate=;Server Certificate=;Application Name=SSIS-Package-{0D655992-8C30-4AA0-BDF2-D4F3CE43F26D}localhost.NorthwindIntegration;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

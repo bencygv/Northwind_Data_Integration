@@ -1,0 +1,178 @@
+-------------------------------
+-- Verifying if DATA is loaded
+-------------------------------
+
+--Selecting the database
+USE Northwind;
+GO
+
+-- Check customer records
+SELECT COUNT(*) AS TotalCustomers
+FROM dbo.Customers;
+
+-- Check product records
+SELECT COUNT(*) AS TotalProducts
+FROM dbo.Products;
+
+-- Check order records
+SELECT COUNT(*) AS TotalOrders
+FROM dbo.Orders;
+
+-- Check categories records
+SELECT COUNT(*) AS TotalCategories
+FROM dbo.Categories;
+
+-- Check employee records
+SELECT COUNT(*) AS TotalEmployees
+FROM dbo.Employees;
+
+-- List all tables in the database
+SELECT
+    TABLE_SCHEMA,
+    TABLE_NAME
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_TYPE = 'BASE TABLE'
+ORDER BY TABLE_NAME;
+
+-- Examine the structure of the Customers table
+SELECT
+    COLUMN_NAME,
+    DATA_TYPE,
+    CHARACTER_MAXIMUM_LENGTH,
+    IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'dbo'
+  AND TABLE_NAME = 'Customers'
+ORDER BY ORDINAL_POSITION;
+
+-- Examine the structure of the Products table
+SELECT
+    COLUMN_NAME,
+    DATA_TYPE,
+    CHARACTER_MAXIMUM_LENGTH,
+    IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'dbo'
+  AND TABLE_NAME = 'Products'
+ORDER BY ORDINAL_POSITION;
+
+-- Examine the structure of the Categories table
+SELECT
+    COLUMN_NAME,
+    DATA_TYPE,
+    CHARACTER_MAXIMUM_LENGTH,
+    IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'dbo'
+  AND TABLE_NAME = 'Categories'
+ORDER BY ORDINAL_POSITION;
+
+-- Examine the structure of the Employees table
+SELECT
+    COLUMN_NAME,
+    DATA_TYPE,
+    CHARACTER_MAXIMUM_LENGTH,
+    IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'dbo'
+  AND TABLE_NAME = 'Employees'
+ORDER BY ORDINAL_POSITION;
+
+-- Examine the structure of EmployeeTerritories
+SELECT
+    COLUMN_NAME,
+    DATA_TYPE,
+    CHARACTER_MAXIMUM_LENGTH,
+    IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'dbo'
+  AND TABLE_NAME = 'EmployeeTerritories'
+ORDER BY ORDINAL_POSITION;
+
+-- Examine the structure of OrderDetails
+SELECT
+    COLUMN_NAME,
+    DATA_TYPE,
+    CHARACTER_MAXIMUM_LENGTH,
+    IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'dbo'
+  AND TABLE_NAME = 'Order Details'
+ORDER BY ORDINAL_POSITION;
+
+-- Examine the structure of the Orders table
+SELECT
+    COLUMN_NAME,
+    DATA_TYPE,
+    CHARACTER_MAXIMUM_LENGTH,
+    IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'dbo'
+  AND TABLE_NAME = 'Orders'
+ORDER BY ORDINAL_POSITION;
+
+-- Examine the structure of the Region table
+SELECT
+    COLUMN_NAME,
+    DATA_TYPE,
+    CHARACTER_MAXIMUM_LENGTH,
+    IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'dbo'
+  AND TABLE_NAME = 'Region'
+ORDER BY ORDINAL_POSITION;
+
+-- Examine the structure of the Shippers table
+SELECT
+    COLUMN_NAME,
+    DATA_TYPE,
+    CHARACTER_MAXIMUM_LENGTH,
+    IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'dbo'
+  AND TABLE_NAME = 'Shippers'
+ORDER BY ORDINAL_POSITION;
+
+-- Examine the structure of the Suppliers table
+SELECT
+    COLUMN_NAME,
+    DATA_TYPE,
+    CHARACTER_MAXIMUM_LENGTH,
+    IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'dbo'
+  AND TABLE_NAME = 'Suppliers'
+ORDER BY ORDINAL_POSITION;
+
+-- Examine the structure of the Territories table
+SELECT
+    COLUMN_NAME,
+    DATA_TYPE,
+    CHARACTER_MAXIMUM_LENGTH,
+    IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'dbo'
+  AND TABLE_NAME = 'Territories'
+ORDER BY ORDINAL_POSITION;
+
+-- Examine the structure of CustomerCustomerDemo
+SELECT
+    COLUMN_NAME,
+    DATA_TYPE,
+    CHARACTER_MAXIMUM_LENGTH,
+    IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'dbo'
+  AND TABLE_NAME = 'CustomerCustomerDemo'
+ORDER BY ORDINAL_POSITION;
+
+-- Examine the structure of CustomerDemographics
+SELECT
+    COLUMN_NAME,
+    DATA_TYPE,
+    CHARACTER_MAXIMUM_LENGTH,
+    IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'dbo'
+  AND TABLE_NAME = 'CustomerDemographics'
+ORDER BY ORDINAL_POSITION;

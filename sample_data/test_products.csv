@@ -1,0 +1,9 @@
+ProductID,ProductName,Category,UnitPrice,UnitsInStock
+101,  Medical Gloves  ,Consumables,12.50,120
+102,Face  Masks,Consumables,8.75,90
+103,,Equipment,15.00,40
+104,Thermometer,Equipment,-5.00,15
+105,Sanitizer,Consumables,not_a_number,20
+106,Bandage  Roll,Consumables,3.20,0
+107,  Syringe,Consumables,4.50,-2
+108,Stethoscope,Equipment,55.99,10

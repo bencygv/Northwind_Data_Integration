@@ -1,0 +1,59 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/11/2026 9:48:03 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BENCY"
+  DTS:CreatorName="BENCY\bency"
+  DTS:DTSID="{C31E29B2-481E-4B60-8E40-21C4B1E25072}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="8192"
+  DTS:ObjectName="09_Load_Cleaned_Categories"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{AA7C5369-E462-4931-BBE8-9EB5668A1AA4}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\SQL_Upsert_Cleaned_Categories"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9BE26759-354A-4E36-B5F9-FF647C755B60}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_Upsert_Cleaned_Categories"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0D655992-8C30-4AA0-BDF2-D4F3CE43F26D}"
+          SQLTask:SqlStatementSource="&#xA;SET NOCOUNT ON;&#xA;SET XACT_ABORT ON;&#xA;&#xA;BEGIN TRY&#xA;    BEGIN TRANSACTION;&#xA;&#xA;    -- STEP 1: Update existing Categories&#xA;    UPDATE c&#xA;    SET&#xA;        c.CategoryName = s.CategoryName,&#xA;        c.Description = s.Description,&#xA;        c.Picture = s.Picture&#xA;    FROM cleaned.Categories AS c&#xA;    INNER JOIN staging.Categories AS s&#xA;        ON c.CategoryID = s.CategoryID&#xA;    WHERE EXISTS&#xA;    (&#xA;        SELECT&#xA;            c.CategoryName,&#xA;            c.Description,&#xA;            c.Picture&#xA;        EXCEPT&#xA;        SELECT&#xA;            s.CategoryName,&#xA;            s.Description,&#xA;            s.Picture&#xA;    );&#xA;&#xA;    -- STEP 2: Insert new Categories&#xA;    INSERT INTO cleaned.Categories&#xA;    (&#xA;        CategoryID,&#xA;        CategoryName,&#xA;        Description,&#xA;        Picture&#xA;    )&#xA;    SELECT&#xA;        s.CategoryID,&#xA;        s.CategoryName,&#xA;        s.Description,&#xA;        s.Picture&#xA;    FROM staging.Categories AS s&#xA;    WHERE NOT EXISTS&#xA;    (&#xA;        SELECT 1&#xA;        FROM cleaned.Categories AS c&#xA;        WHERE c.CategoryID = s.CategoryID&#xA;    );&#xA;&#xA;    COMMIT TRANSACTION;&#xA;END TRY&#xA;&#xA;BEGIN CATCH&#xA;    IF XACT_STATE() &lt;&gt; 0&#xA;        ROLLBACK TRANSACTION;&#xA;&#xA;    THROW;&#xA;END CATCH;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="238.5,42"
+          Id="Package\SQL_Upsert_Cleaned_Categories"
+          TopLeft="262,44.4166664460467" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

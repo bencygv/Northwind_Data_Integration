@@ -1,0 +1,2867 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/12/2026 12:52:50 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BENCY"
+  DTS:CreatorName="BENCY\bency"
+  DTS:DTSID="{CCF63212-9045-4269-9E8F-223021773C00}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="8192"
+  DTS:ObjectName="15_Clean_Products_SSIS dtsx"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="39"
+  DTS:VersionGUID="{93C42791-603C-43C4-AB07-EAD5030EBDCA}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CCM_Test_Products_CSV]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{D6074628-85C4-4820-AEAF-5EF3731EB44B}"
+      DTS:ObjectName="CCM_Test_Products_CSV">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="8192"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="65001"
+          DTS:ConnectionString="C:\Users\bency\Documents\Data-Projects\Northwind_Data_Integration\sample_data\test_products.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ProductID"
+              DTS:DTSID="{45FB3CAE-C0B5-4C57-8ABF-BDA0FCEF76AF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ProductName"
+              DTS:DTSID="{FCE29B34-DA38-4258-B8D7-D7E2984D8CF0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Category"
+              DTS:DTSID="{660C1CB6-1252-42A0-88FA-1A9AE99A226E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="UnitPrice"
+              DTS:DTSID="{78C15ABE-2C3F-422B-9B2B-E9C3FDE25F3E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="UnitsInStock"
+              DTS:DTSID="{4EA80482-A182-45D7-A9EA-F26FDE713F6B}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT_Clean_Validate_Products"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{F784D6E5-99D1-427B-BAC8-BBA3CA41D347}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="1033"
+      DTS:ObjectName="DFT_Clean_Validate_Products"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="CSPL_Validate_Products"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Inputs[Conditional Split Input].Columns[ProductName_Clean]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="ProductName_Clean"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName.Outputs[Derived Column Output].Columns[ProductName_Clean]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Inputs[Conditional Split Input].Columns[UnitPrice_Num]"
+                      cachedDataType="numeric"
+                      cachedName="UnitPrice_Num"
+                      cachedPrecision="19"
+                      cachedScale="4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[UnitPrice_Num]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Inputs[Conditional Split Input].Columns[UnitsInStock_Num]"
+                      cachedDataType="i4"
+                      cachedName="UnitsInStock_Num"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[UnitsInStock_Num]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Outputs[Invalid_ProductName]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Invalid_ProductName"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName.Outputs[Derived Column Output].Columns[ProductName_Clean]}) ?  TRUE  : [LEN](#{Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName.Outputs[Derived Column Output].Columns[ProductName_Clean]}) == 0</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(ProductName_Clean) ?  TRUE  : LEN(ProductName_Clean) == 0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Outputs[Invalid_UnitPrice]"
+                  description="Output 2 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Invalid_UnitPrice"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[UnitPrice_Num]}) ?  TRUE  : #{Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[UnitPrice_Num]} &lt; 0</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(UnitPrice_Num) ?  TRUE  : UnitPrice_Num &lt; 0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Outputs[Invalid_Stock]"
+                  description="Output 3 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Invalid_Stock"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[UnitsInStock_Num]}) ?  TRUE  : #{Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[UnitsInStock_Num]} &lt; 0</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(UnitsInStock_Num) ?  TRUE  : UnitsInStock_Num &lt; 0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">2</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Outputs[Valid_Products]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Valid_Products"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="DCV_Convert_Product_Numbers"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Inputs[Data Conversion Input].Columns[UnitPrice]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="UnitPrice"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitPrice]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Inputs[Data Conversion Input].Columns[UnitsInStock]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="UnitsInStock"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitsInStock]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Inputs[Data Conversion Input].Columns[ProductID]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ProductID"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[ProductID]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Inputs[Data Conversion Input].Columns[ProductName_Clean]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="ProductName_Clean"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName.Outputs[Derived Column Output].Columns[ProductName_Clean]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Inputs[Data Conversion Input].Columns[Category]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Category"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[Category]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[UnitPrice_Num]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[UnitPrice_Num]"
+                      name="UnitPrice_Num"
+                      precision="19"
+                      scale="4"
+                      truncationRowDisposition="RedirectRow">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitPrice]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[UnitsInStock_Num]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[UnitsInStock_Num]"
+                      name="UnitsInStock_Num"
+                      truncationRowDisposition="RedirectRow">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitsInStock]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[ProductID_Unicode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      length="20"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[ProductID_Unicode]"
+                      name="ProductID_Unicode"
+                      truncationRowDisposition="RedirectRow">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[ProductID]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[ProductName_Unicode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      length="100"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[ProductName_Unicode]"
+                      name="ProductName_Unicode"
+                      truncationRowDisposition="RedirectRow">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName.Outputs[Derived Column Output].Columns[ProductName_Clean]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[Category_Unicode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      length="60"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[Category_Unicode]"
+                      name="Category_Unicode"
+                      truncationRowDisposition="RedirectRow">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[Category]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DEST_Rejected_Conversion_Products"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[demo].[RejectedProducts]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Connections[OleDbConnection]"
+                  connectionManagerID="{0D655992-8C30-4AA0-BDF2-D4F3CE43F26D}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[CM_Northwind_Destination]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].Columns[ErrorCode]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].ExternalColumns[ErrorCode]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Error Output].Columns[ErrorCode]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].Columns[ErrorColumn]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].ExternalColumns[ErrorColumn]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Error Output].Columns[ErrorColumn]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].Columns[RejectReason]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="RejectReason"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].ExternalColumns[RejectReason]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output].Columns[RejectReason]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].Columns[ProductID_Reject]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="ProductID_Reject"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output].Columns[ProductID_Reject]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].Columns[ProductName_Reject]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="ProductName_Reject"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output].Columns[ProductName_Reject]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].Columns[Category_Reject]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Category_Reject"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output].Columns[Category_Reject]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].Columns[UnitPrice_Reject]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="UnitPrice_Reject"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output].Columns[UnitPrice_Reject]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].Columns[UnitsInStock_Reject]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="UnitsInStock_Reject"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].ExternalColumns[UnitsInStock]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output].Columns[UnitsInStock_Reject]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
+                      dataType="wstr"
+                      length="20"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                      dataType="wstr"
+                      length="100"
+                      name="ProductName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                      dataType="wstr"
+                      length="60"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      dataType="wstr"
+                      length="40"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].ExternalColumns[UnitsInStock]"
+                      dataType="wstr"
+                      length="40"
+                      name="UnitsInStock" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].ExternalColumns[RejectReason]"
+                      dataType="wstr"
+                      length="100"
+                      name="RejectReason" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].ExternalColumns[ErrorCode]"
+                      dataType="i4"
+                      name="ErrorCode" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input].ExternalColumns[ErrorColumn]"
+                      dataType="i4"
+                      name="ErrorColumn" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DEST_Rejected_ProductName"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[demo].[RejectedProducts]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Connections[OleDbConnection]"
+                  connectionManagerID="{0D655992-8C30-4AA0-BDF2-D4F3CE43F26D}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[CM_Northwind_Destination]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].Columns[RejectReason]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="RejectReason"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].ExternalColumns[RejectReason]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Outputs[Derived Column Output].Columns[RejectReason]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].Columns[ProductID_Unicode]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="ProductID_Unicode"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[ProductID_Unicode]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].Columns[ProductName_Unicode]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="ProductName_Unicode"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[ProductName_Unicode]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].Columns[Category_Unicode]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Category_Unicode"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[Category_Unicode]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].Columns[UnitPrice_Reject]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="UnitPrice_Reject"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Outputs[Derived Column Output].Columns[UnitPrice_Reject]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].Columns[UnitsInStock_Reject]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="UnitsInStock_Reject"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].ExternalColumns[UnitsInStock]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Outputs[Derived Column Output].Columns[UnitsInStock_Reject]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
+                      dataType="wstr"
+                      length="20"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                      dataType="wstr"
+                      length="100"
+                      name="ProductName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                      dataType="wstr"
+                      length="60"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      dataType="wstr"
+                      length="40"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].ExternalColumns[UnitsInStock]"
+                      dataType="wstr"
+                      length="40"
+                      name="UnitsInStock" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].ExternalColumns[RejectReason]"
+                      dataType="wstr"
+                      length="100"
+                      name="RejectReason" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].ExternalColumns[ErrorCode]"
+                      dataType="i4"
+                      name="ErrorCode" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input].ExternalColumns[ErrorColumn]"
+                      dataType="i4"
+                      name="ErrorColumn" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DEST_Rejected_Stock"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[demo].[RejectedProducts]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Connections[OleDbConnection]"
+                  connectionManagerID="{0D655992-8C30-4AA0-BDF2-D4F3CE43F26D}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[CM_Northwind_Destination]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].Columns[RejectReason]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="RejectReason"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].ExternalColumns[RejectReason]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Outputs[Derived Column Output].Columns[RejectReason]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].Columns[ProductID_Unicode]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="ProductID_Unicode"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[ProductID_Unicode]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].Columns[ProductName_Unicode]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="ProductName_Unicode"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[ProductName_Unicode]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].Columns[Category_Unicode]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Category_Unicode"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[Category_Unicode]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].Columns[UnitPrice_Reject]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="UnitPrice_Reject"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Outputs[Derived Column Output].Columns[UnitPrice_Reject]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].Columns[UnitsInStock_Reject]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="UnitsInStock_Reject"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].ExternalColumns[UnitsInStock]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Outputs[Derived Column Output].Columns[UnitsInStock_Reject]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
+                      dataType="wstr"
+                      length="20"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                      dataType="wstr"
+                      length="100"
+                      name="ProductName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                      dataType="wstr"
+                      length="60"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      dataType="wstr"
+                      length="40"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].ExternalColumns[UnitsInStock]"
+                      dataType="wstr"
+                      length="40"
+                      name="UnitsInStock" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].ExternalColumns[RejectReason]"
+                      dataType="wstr"
+                      length="100"
+                      name="RejectReason" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].ExternalColumns[ErrorCode]"
+                      dataType="i4"
+                      name="ErrorCode" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input].ExternalColumns[ErrorColumn]"
+                      dataType="i4"
+                      name="ErrorColumn" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DEST_Rejected_UnitPrice"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[demo].[RejectedProducts]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Connections[OleDbConnection]"
+                  connectionManagerID="{0D655992-8C30-4AA0-BDF2-D4F3CE43F26D}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[CM_Northwind_Destination]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].Columns[RejectReason]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="RejectReason"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].ExternalColumns[RejectReason]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Outputs[Derived Column Output].Columns[RejectReason]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].Columns[ProductID_Unicode]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="ProductID_Unicode"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[ProductID_Unicode]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].Columns[ProductName_Unicode]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="ProductName_Unicode"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[ProductName_Unicode]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].Columns[Category_Unicode]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Category_Unicode"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[Category_Unicode]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].Columns[UnitPrice_Reject]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="UnitPrice_Reject"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Outputs[Derived Column Output].Columns[UnitPrice_Reject]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].Columns[UnitsInStock_Reject]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="UnitsInStock_Reject"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].ExternalColumns[UnitsInStock]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Outputs[Derived Column Output].Columns[UnitsInStock_Reject]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
+                      dataType="wstr"
+                      length="20"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                      dataType="wstr"
+                      length="100"
+                      name="ProductName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                      dataType="wstr"
+                      length="60"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      dataType="wstr"
+                      length="40"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].ExternalColumns[UnitsInStock]"
+                      dataType="wstr"
+                      length="40"
+                      name="UnitsInStock" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].ExternalColumns[RejectReason]"
+                      dataType="wstr"
+                      length="100"
+                      name="RejectReason" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].ExternalColumns[ErrorCode]"
+                      dataType="i4"
+                      name="ErrorCode" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input].ExternalColumns[ErrorColumn]"
+                      dataType="i4"
+                      name="ErrorColumn" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DEST_Valid_Products"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[demo].[ValidProducts]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Connections[OleDbConnection]"
+                  connectionManagerID="{0D655992-8C30-4AA0-BDF2-D4F3CE43F26D}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[CM_Northwind_Destination]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Inputs[OLE DB Destination Input].Columns[UnitsInStock]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="UnitsInStock"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Inputs[OLE DB Destination Input].ExternalColumns[UnitsInStock]"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitsInStock]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Inputs[OLE DB Destination Input].Columns[ProductName_Unicode]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="ProductName_Unicode"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[ProductName_Unicode]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Inputs[OLE DB Destination Input].Columns[UnitPrice]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="UnitPrice"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitPrice]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Inputs[OLE DB Destination Input].Columns[Category_Unicode]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="Category_Unicode"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[Category_Unicode]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Inputs[OLE DB Destination Input].Columns[ProductID_Unicode]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="ProductID_Unicode"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
+                      lineageId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output].Columns[ProductID_Unicode]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
+                      dataType="wstr"
+                      length="20"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                      dataType="wstr"
+                      length="100"
+                      name="ProductName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                      dataType="wstr"
+                      length="60"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      dataType="numeric"
+                      name="UnitPrice"
+                      precision="19"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Inputs[OLE DB Destination Input].ExternalColumns[UnitsInStock]"
+                      dataType="i4"
+                      name="UnitsInStock" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="DRV_Clean_ProductName"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName.Inputs[Derived Column Input].Columns[ProductName]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ProductName"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[ProductName]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName.Outputs[Derived Column Output].Columns[ProductName_Clean]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName.Outputs[Derived Column Output].Columns[ProductName_Clean]"
+                      name="ProductName_Clean"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[TRIM]([REPLACE](#{Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[ProductName]},"  "," "))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">TRIM(REPLACE(ProductName,"  "," "))</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="DRV_Conversion_Error_Reason"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Inputs[Derived Column Input].Columns[ProductID]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ProductID"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[ProductID]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Inputs[Derived Column Input].Columns[ProductName]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ProductName"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[ProductName]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Inputs[Derived Column Input].Columns[Category]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Category"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[Category]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Inputs[Derived Column Input].Columns[UnitPrice]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="UnitPrice"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitPrice]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Inputs[Derived Column Input].Columns[UnitsInStock]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="UnitsInStock"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitsInStock]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output].Columns[RejectReason]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output].Columns[RejectReason]"
+                      name="RejectReason"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,100)"Data conversion failed"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,100)"Data conversion failed"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output].Columns[ProductID_Reject]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="20"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output].Columns[ProductID_Reject]"
+                      name="ProductID_Reject"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,20)#{Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[ProductID]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,20)ProductID</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output].Columns[ProductName_Reject]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output].Columns[ProductName_Reject]"
+                      name="ProductName_Reject"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,100)#{Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[ProductName]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,100)ProductName</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output].Columns[Category_Reject]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="60"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output].Columns[Category_Reject]"
+                      name="Category_Reject"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,60)#{Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[Category]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,60)Category</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output].Columns[UnitPrice_Reject]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="40"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output].Columns[UnitPrice_Reject]"
+                      name="UnitPrice_Reject"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,40)#{Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitPrice]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,40)UnitPrice</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output].Columns[UnitsInStock_Reject]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="40"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output].Columns[UnitsInStock_Reject]"
+                      name="UnitsInStock_Reject"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,40)#{Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitsInStock]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,40)UnitsInStock</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="DRV_Invalid_ProductName_Reason"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Inputs[Derived Column Input].Columns[UnitPrice]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="UnitPrice"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitPrice]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Inputs[Derived Column Input].Columns[UnitsInStock]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="UnitsInStock"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitsInStock]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Outputs[Derived Column Output].Columns[RejectReason]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Outputs[Derived Column Output].Columns[RejectReason]"
+                      name="RejectReason"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,100)"Missing ProductName"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,100)"Missing ProductName"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Outputs[Derived Column Output].Columns[UnitPrice_Reject]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="40"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Outputs[Derived Column Output].Columns[UnitPrice_Reject]"
+                      name="UnitPrice_Reject"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,40)#{Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitPrice]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,40)UnitPrice</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Outputs[Derived Column Output].Columns[UnitsInStock_Reject]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="40"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Outputs[Derived Column Output].Columns[UnitsInStock_Reject]"
+                      name="UnitsInStock_Reject"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,40)#{Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitsInStock]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,40)UnitsInStock</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="DRV_Invalid_Stock_reason"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Inputs[Derived Column Input].Columns[UnitPrice]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="UnitPrice"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitPrice]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Inputs[Derived Column Input].Columns[UnitsInStock]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="UnitsInStock"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitsInStock]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Outputs[Derived Column Output].Columns[RejectReason]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Outputs[Derived Column Output].Columns[RejectReason]"
+                      name="RejectReason"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,100)"Missing or negative stock quantity"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,100)"Missing or negative stock quantity"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Outputs[Derived Column Output].Columns[UnitPrice_Reject]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="40"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Outputs[Derived Column Output].Columns[UnitPrice_Reject]"
+                      name="UnitPrice_Reject"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,40)#{Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitPrice]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,40)UnitPrice</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Outputs[Derived Column Output].Columns[UnitsInStock_Reject]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="40"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Outputs[Derived Column Output].Columns[UnitsInStock_Reject]"
+                      name="UnitsInStock_Reject"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,40)#{Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitsInStock]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,40)UnitsInStock</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="DRV_Invalid_UnitPrice_Reason"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Inputs[Derived Column Input].Columns[UnitPrice]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="UnitPrice"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitPrice]" />
+                    <inputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Inputs[Derived Column Input].Columns[UnitsInStock]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="UnitsInStock"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitsInStock]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Outputs[Derived Column Output].Columns[RejectReason]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Outputs[Derived Column Output].Columns[RejectReason]"
+                      name="RejectReason"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,100)"Missing or negative UnitPrice"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,100)"Missing or negative UnitPrice"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Outputs[Derived Column Output].Columns[UnitPrice_Reject]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="40"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Outputs[Derived Column Output].Columns[UnitPrice_Reject]"
+                      name="UnitPrice_Reject"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,40)#{Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitPrice]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,40)UnitPrice</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Outputs[Derived Column Output].Columns[UnitsInStock_Reject]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="40"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Outputs[Derived Column Output].Columns[UnitsInStock_Reject]"
+                      name="UnitsInStock_Reject"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_WSTR,40)#{Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitsInStock]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_WSTR,40)UnitsInStock</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="8192"
+              name="SRC_Test_Products_CSV"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CCM_Test_Products_CSV]"
+                  connectionManagerRefId="Package.ConnectionManagers[CCM_Test_Products_CSV]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[ProductID]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].ExternalColumns[ProductID]"
+                      length="50"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[ProductID]"
+                      name="ProductID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[ProductName]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].ExternalColumns[ProductName]"
+                      length="50"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[ProductName]"
+                      name="ProductName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[Category]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].ExternalColumns[Category]"
+                      length="50"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[Category]"
+                      name="Category"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitPrice]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].ExternalColumns[UnitPrice]"
+                      length="50"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitPrice]"
+                      name="UnitPrice"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitsInStock]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].ExternalColumns[UnitsInStock]"
+                      length="50"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].Columns[UnitsInStock]"
+                      name="UnitsInStock"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].ExternalColumns[ProductID]"
+                      codePage="65001"
+                      dataType="str"
+                      length="50"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].ExternalColumns[ProductName]"
+                      codePage="65001"
+                      dataType="str"
+                      length="50"
+                      name="ProductName" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].ExternalColumns[Category]"
+                      codePage="65001"
+                      dataType="str"
+                      length="50"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].ExternalColumns[UnitPrice]"
+                      codePage="65001"
+                      dataType="str"
+                      length="50"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output].ExternalColumns[UnitsInStock]"
+                      codePage="65001"
+                      dataType="str"
+                      length="50"
+                      name="UnitsInStock" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="65001"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT_Clean_Validate_Products.Paths[Data Conversion Error Output]"
+              endId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Inputs[Derived Column Input]"
+              name="Data Conversion Error Output"
+              startId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Error Output]" />
+            <path
+              refId="Package\DFT_Clean_Validate_Products.Paths[Data Conversion Output]"
+              endId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Inputs[Conditional Split Input]"
+              name="Data Conversion Output"
+              startId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\DFT_Clean_Validate_Products.Paths[Derived Column Output]"
+              endId="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_Clean_Validate_Products.Paths[Derived Column Output1]"
+              endId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_Clean_Validate_Products.Paths[Derived Column Output2]"
+              endId="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_Clean_Validate_Products.Paths[Derived Column Output3]"
+              endId="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_Clean_Validate_Products.Paths[Derived Column Output4]"
+              endId="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_Clean_Validate_Products.Paths[Flat File Source Output]"
+              endId="Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName.Inputs[Derived Column Input]"
+              name="Flat File Source Output"
+              startId="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV.Outputs[Flat File Source Output]" />
+            <path
+              refId="Package\DFT_Clean_Validate_Products.Paths[Invalid_ProductName]"
+              endId="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason.Inputs[Derived Column Input]"
+              name="Invalid_ProductName"
+              startId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Outputs[Invalid_ProductName]" />
+            <path
+              refId="Package\DFT_Clean_Validate_Products.Paths[Invalid_Stock]"
+              endId="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason.Inputs[Derived Column Input]"
+              name="Invalid_Stock"
+              startId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Outputs[Invalid_Stock]" />
+            <path
+              refId="Package\DFT_Clean_Validate_Products.Paths[Invalid_UnitPrice]"
+              endId="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason.Inputs[Derived Column Input]"
+              name="Invalid_UnitPrice"
+              startId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Outputs[Invalid_UnitPrice]" />
+            <path
+              refId="Package\DFT_Clean_Validate_Products.Paths[Valid_Products]"
+              endId="Package\DFT_Clean_Validate_Products\DEST_Valid_Products.Inputs[OLE DB Destination Input]"
+              name="Valid_Products"
+              startId="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products.Outputs[Valid_Products]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_Clear_Demo_Tables"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{429C71E2-FA3B-41ED-BE2E-2B32129BC679}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_Clear_Demo_Tables"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0D655992-8C30-4AA0-BDF2-D4F3CE43F26D}"
+          SQLTask:SqlStatementSource="&#xA;TRUNCATE TABLE demo.ValidProducts;&#xA;TRUNCATE TABLE demo.RejectedProducts;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{382EF769-4C00-4E9D-B7A5-AF95B3797730}"
+      DTS:From="Package\SQL_Clear_Demo_Tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\DFT_Clean_Validate_Products" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="224,42"
+          Id="Package\DFT_Clean_Validate_Products"
+          TopLeft="282,230.749998853852" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\SQL_Clear_Demo_Tables"
+          TopLeft="298.5,159.249999208997" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="396.75,201.249999208997">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.4999996448557"
+              Start="0,0"
+              End="0,21.9999996448557">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.9999996448557" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT_Clean_Validate_Products">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="202,42"
+          Id="Package\DFT_Clean_Validate_Products\SRC_Test_Products_CSV"
+          TopLeft="301.875,38.3229164763147" />
+        <NodeLayout
+          Size="204.5,42"
+          Id="Package\DFT_Clean_Validate_Products\DRV_Clean_ProductName"
+          TopLeft="304.375,127.697916032384" />
+        <EdgeLayout
+          Id="Package\DFT_Clean_Validate_Products.Paths[Flat File Source Output]"
+          TopLeft="404.75,80.3229164763147">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.3749995560696"
+              Start="0,0"
+              End="0,39.8749995560696">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.8749995560696" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="234,42"
+          Id="Package\DFT_Clean_Validate_Products\DCV_Convert_Product_Numbers"
+          TopLeft="287.875,200.281249005192" />
+        <EdgeLayout
+          Id="Package\DFT_Clean_Validate_Products.Paths[Derived Column Output]"
+          TopLeft="405.75,169.697916032384">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.583332972808"
+              Start="0,0"
+              End="0,23.083332972808">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.083332972808" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="197.5,42"
+          Id="Package\DFT_Clean_Validate_Products\CSPL_Validate_Products"
+          TopLeft="306.097222222222,287.971063384447" />
+        <EdgeLayout
+          Id="Package\DFT_Clean_Validate_Products.Paths[Data Conversion Output]"
+          TopLeft="404.861111111111,242.281249005192">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45.6898143792548"
+              Start="0,0"
+              End="0,38.1898143792548">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.1898143792548" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="183.5,42"
+          Id="Package\DFT_Clean_Validate_Products\DEST_Valid_Products"
+          TopLeft="286.263888888889,437.471062641873" />
+        <EdgeLayout
+          Id="Package\DFT_Clean_Validate_Products.Paths[Valid_Products]"
+          TopLeft="381.955555555556,329.971063384447">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,107.499999257425"
+              Start="0,0"
+              End="0,99.9999992574255">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,99.9999992574255" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-33.35076171875,44.4687496287127,66.7015234375,11.0625"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="231,42"
+          Id="Package\DFT_Clean_Validate_Products\DRV_Conversion_Error_Reason"
+          TopLeft="671.486111111111,138.892360421225" />
+        <EdgeLayout
+          Id="Package\DFT_Clean_Validate_Products.Paths[Data Conversion Error Output]"
+          TopLeft="521.875,221.281249005192">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="149.611111111111,-61.388888583967"
+              Start="0,0"
+              End="142.111111111111,-61.388888583967">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="70.8055555555555,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="70.8055555555555,0"
+                    Point2="74.8055555555555,0"
+                    Point3="74.8055555555555,-4" />
+                  <mssgle:LineSegment
+                    End="74.8055555555555,-57.388888583967" />
+                  <mssgle:CubicBezierSegment
+                    Point1="74.8055555555555,-57.388888583967"
+                    Point2="74.8055555555555,-61.388888583967"
+                    Point3="78.8055555555555,-61.388888583967" />
+                  <mssgle:LineSegment
+                    End="142.111111111111,-61.388888583967" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="8.71916883680555,1,132.1727734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="260.5,42"
+          Id="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products"
+          TopLeft="651.208333333333,256.734952428487" />
+        <EdgeLayout
+          Id="Package\DFT_Clean_Validate_Products.Paths[Derived Column Output1]"
+          TopLeft="784.222222222222,180.892360421225">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,75.842592007262"
+              Start="0,0"
+              End="0,68.342592007262">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,68.342592007262" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="249.5,42"
+          Id="Package\DFT_Clean_Validate_Products\DRV_Invalid_ProductName_Reason"
+          TopLeft="31.6527777777778,511.739580791495" />
+        <EdgeLayout
+          Id="Package\DFT_Clean_Validate_Products.Paths[Invalid_ProductName]"
+          TopLeft="347.997222222222,329.971063384447">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-191.594444444444,181.768517407048"
+              Start="0,0"
+              End="-191.594444444444,174.268517407048">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.149313041986" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,50.149313041986"
+                    Point2="0,54.149313041986"
+                    Point3="-4,54.149313041986" />
+                  <mssgle:LineSegment
+                    End="-187.594444444444,54.149313041986" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-187.594444444444,54.149313041986"
+                    Point2="-191.594444444444,54.149313041986"
+                    Point3="-191.594444444444,58.149313041986" />
+                  <mssgle:LineSegment
+                    End="-191.594444444444,174.268517407048" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-143.585171440972,59.149313041986,95.5758984375,11.0625"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="224.5,42"
+          Id="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName"
+          TopLeft="47.7638888888889,608.809024897835" />
+        <EdgeLayout
+          Id="Package\DFT_Clean_Validate_Products.Paths[Derived Column Output2]"
+          TopLeft="158.208333333333,553.739580791495">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55.0694441063397"
+              Start="0,0"
+              End="0,47.5694441063397">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.5694441063397" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="228,42"
+          Id="Package\DFT_Clean_Validate_Products\DRV_Invalid_UnitPrice_Reason"
+          TopLeft="419.541666666667,515.646988509803" />
+        <EdgeLayout
+          Id="Package\DFT_Clean_Validate_Products.Paths[Invalid_UnitPrice]"
+          TopLeft="423.797222222222,329.971063384447">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="109.744444444444,185.675925125356"
+              Start="0,0"
+              End="109.744444444444,178.175925125356">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,78.984815597891" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,78.984815597891"
+                    Point2="0,82.984815597891"
+                    Point3="4,82.984815597891" />
+                  <mssgle:LineSegment
+                    End="105.744444444444,82.984815597891" />
+                  <mssgle:CubicBezierSegment
+                    Point1="105.744444444444,82.984815597891"
+                    Point2="109.744444444444,82.984815597891"
+                    Point3="109.744444444444,86.984815597891" />
+                  <mssgle:LineSegment
+                    End="109.744444444444,178.175925125356" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="17.1542730034722,87.984815597891,75.4358984375,11.0625"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="203,42"
+          Id="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice"
+          TopLeft="432.541666666667,614.290506538354" />
+        <EdgeLayout
+          Id="Package\DFT_Clean_Validate_Products.Paths[Derived Column Output3]"
+          TopLeft="533.791666666667,557.646988509803">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.6435180285507"
+              Start="0,0"
+              End="0,49.1435180285507">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.1435180285507" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="207.5,42"
+          Id="Package\DFT_Clean_Validate_Products\DRV_Invalid_Stock_reason"
+          TopLeft="677.875,406.447915144523" />
+        <EdgeLayout
+          Id="Package\DFT_Clean_Validate_Products.Paths[Invalid_Stock]"
+          TopLeft="461.697222222222,329.971063384447">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="319.927777777778,76.4768517600763"
+              Start="0,0"
+              End="319.927777777778,68.9768517600763">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.7826526039616" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.7826526039616"
+                    Point2="0,22.7826526039616"
+                    Point3="4,22.7826526039616" />
+                  <mssgle:LineSegment
+                    End="315.927777777778,22.7826526039616" />
+                  <mssgle:CubicBezierSegment
+                    Point1="315.927777777778,22.7826526039616"
+                    Point2="319.927777777778,22.7826526039616"
+                    Point3="319.927777777778,26.7826526039616" />
+                  <mssgle:LineSegment
+                    End="319.927777777778,68.9768517600763" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="129.568166232639,27.7826526039616,60.7914453125,11.0625"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="186.5,42"
+          Id="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock"
+          TopLeft="682.375,482.281248101188" />
+        <EdgeLayout
+          Id="Package\DFT_Clean_Validate_Products.Paths[Derived Column Output4]"
+          TopLeft="778.625,448.447915144523">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.8333329566649"
+              Start="0,0"
+              End="0,26.3333329566649">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.3333329566649" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Clean_Validate_Products\DEST_Rejected_UnitPrice">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Clean_Validate_Products\DEST_Rejected_Conversion_Products">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Clean_Validate_Products\DEST_Valid_Products">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Clean_Validate_Products\DEST_Rejected_ProductName">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_Clean_Validate_Products\DEST_Rejected_Stock">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
